@@ -30,7 +30,7 @@ async function main(){
 async function createListing(newListing){
     try {
         await client.connect()
-      const result = await client.db("gfg").collection("student").insertOne(newListing);
+      const result = await client.db("gfg").collection("collection").insertOne(newListing);
       console.log(`New listing created with the following id: ${result.insertedId}`);
       return result.insertedId
     } catch (e) {
