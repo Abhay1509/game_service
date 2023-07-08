@@ -6,17 +6,19 @@ app.use(cors());
 
 const { createListing, getCollections } = require("./db");
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(async (request, response) => {
   if (request.path == "/addNewRow") {
-    console.log("request body", request.params);
-    console.log("request body", request.name);
-    console.log("request body", request.num);
-    console.log("request body", request.headers);
-    console.log("request url :: ", request.url);
-    console.log("request data :: ", response.data);
-    const adding = {};
-    adding.name = request.name;
-    adding.num = request.num;
+    console.log("request body", request.body);
+
+    const { name, age } = request.body;
+    const adding = {
+      name,
+      age,
+    };
     const res = await createListing(adding);
     response.json({ message: res });
   } else if (request.path == "/getAllCollections") {
@@ -25,7 +27,7 @@ app.use(async (request, response) => {
     console.log("post process log ::", res);
     response.json(res);
   } else {
-    response.json({ message: "Hey! This is your server response!" });
+    response.json({ message1: "Hey! This is your server response!" });
   }
 });
 
