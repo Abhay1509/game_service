@@ -29,7 +29,7 @@ async function main(){
 
 async function createListing(newListing){
     try {
-        await client.connect()
+        await client.connect().then(()=>console.log("clientConnected"))
       const result = await client.db("gfg").collection("collection").insertOne(newListing);
       console.log(`New listing created with the following id: ${result.insertedId}`);
       return result.insertedId
@@ -37,26 +37,25 @@ async function createListing(newListing){
       console.error(e)
       return e.toString()
     } finally {
-        client.close()
+        // client.close()
     }
   }
 
   async function getCollections() {
     try {
-        await client.connect();
+        await client.connect().then(()=>console.log("clientConnected"));
       const db = client.db('gfg');
       const collections = await db.collections();
       ;
       const jsoncollection = collections[0].find()
 
       const nc = await jsoncollection.toArray()
-  
       return nc
     } catch (e) {      
       console.error(e);
       return e.toString()
     } finally {
-        client.close()
+        // client.close()
     }
   }
 

@@ -19,12 +19,13 @@ app.use(async (request, response) => {
       name,
       age,
     };
-    const res = await createListing(adding);
+    const res1 = await createListing(adding);
+    const res = await getCollections();
     response.json({ message: res });
   } else if (request.path == "/getAllCollections") {
     console.log("request url :: ", request.url);
     const res = await getCollections();
-    console.log("post process log ::", res);
+    console.log("get process log ::", res);
     response.json(res);
   } else {
     response.json({ message1: "Hey! This is your server response!" });
