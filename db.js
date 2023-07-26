@@ -2,6 +2,8 @@ const {MongoClient} = require('mongodb');
 
 const uri = "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.0";
 const client = new MongoClient(uri);
+    // console.log(req.socket.remoteAddress);
+
 
 async function listDatabases(client){
     databasesList = await client.db().admin().listDatabases();
